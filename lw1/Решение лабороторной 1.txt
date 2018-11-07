@@ -1,0 +1,28 @@
+1 задание.
+ 1.
+  localhost/index.txt
+  Content-Type text/plain
+  Content-length 14
+  Server nginx/1.2.2
+ 2.
+  localhost/image/webtechologes.png
+  Content-Type image/png
+  Content-length 1137202
+  Server nginx/1.2.2
+ 3.
+  localhost/media/water.mp4
+  Content-Type aplication/octet-stream
+  Content-length 14
+  Server nginx/1.2.2
+
+2 задание.
+а. статут 404 —траница не найдена, то есть отсутствует на сервере.
+b. статус 304 Not Modified не указана кодировка charset в Content Type или в meta в HTML
+c. статус 200 все работает
+d.статус 302 перенаправление после запроса в коде php
+e.статус 502 в php прописано вернуть статус 502
+f.статус 500 в php написано вернуть указанную ошибку в HTTP заголовок
+g.статус 400 в php Ќаписано условие если в запросе GET [how_to_work]!='hard', а в запросе how_to_work = hardly, не hard
+3 задание.
+ƒокументы, переданные с Ќ““–, которые имеют след типы текста: text/html, text/plain  и тд
+могут послать charset параматр чтобы указать кодировку символов документа.
