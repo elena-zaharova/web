@@ -1,6 +1,6 @@
 <?php
-$argc;
-$argv;
+header("Content-Type: text/plain");
+
 if($argc < 1){
     echo "Incorrect number of arguments! \n Usage php remove_duplicates.php <input string>";
 }

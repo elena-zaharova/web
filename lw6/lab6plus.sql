@@ -48,16 +48,24 @@ CREATE TABLE course (
     ); 
 
 --    1. отобразить количество курсов, на которые ходит более 5 студентов
-SELECT count(students_x_courses.course_id) FROM students_x_courses
-WHERE count(students_x_courses.students_id) > 5;
+CREATE TEMPORARY TABLE table_temp AS (
+  SELECT students_x_courses.curse_id AS curse
+  FROM students_x_courses
+  GROUP BY students_x_courses.curse_id
+  HAVING COUNT(students_x_courses.student_id) > 5
+);
+
+SELECT COUNT(table_temp.curse) AS count_curse
+FROM table_temp;
 
 --    2. отобразить все курсы, на которые записан определенный студент.
-SELECT courses.name, students.name 
+SELECT GROUP_CONCAT(courses.name), students.name 
 FROM students_x_courses
 LEFT JOIN students
 ON students_id.students_x_courses = students_id.students
 LEFT JOIN course
-ON course_id.students_x_courses = course_id.course;
+ON course_id.students_x_courses = course_id.course
+GROUP BY students_x_courses.student_id;
 
 -- 5 Может ли значение в столбце(ах), на который наложено ограничение
 -- foreign key, равняться null? Привидите пример. 
@@ -78,16 +86,19 @@ SELECT DISTINCT name_of_columns FROM name_of_table;
 --    orders - таблица с заказами (orders_id, users_id, status)
 --    1) Выбрать всех пользователей из таблицы users, у которых ВСЕ записи в таблице orders имеют status = 0
 
-SELECT name FROM users
+SELECT users.users_id, users.name, orders.status FROM users
 LEFT JOIN orders
 ON orders.users_id = users.users_id
-WHERE status = 0 ;
+WHERE status = 0 
+GROUP BY orders.users_id ;
 
 --    2) Выбрать всех пользователей из таблицы users, у которых больше 5 записей в таблице orders имеют status = 1
-SELECT name FROM users
+SELECT users.users_id, users.name, GROUP_CONCAT(orders.status) FROM users
 LEFT JOIN orders
 ON orders.users_id = users.users_id
-WHERE status = 1 AND COUNT(orders.users_id) > 5  ;
+WHERE orders.status = 1
+GROUP BY orders.users_id
+HAVING COUNT(orders.orders_id) > 5;
 
 
 -- 8)  В чем различие между выражениями HAVING и WHERE? 

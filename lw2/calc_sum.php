@@ -1,4 +1,6 @@
 <?php
+header("Content-Type: text/plain");
+
      $arg1 = 0;
      $arg2 = 0;
      $result = 0;
